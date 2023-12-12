@@ -3,8 +3,8 @@ using UnityEngine;
 public class FoodSpawner : MonoBehaviour
 {
     public GameObject foodPrefab;
-    public Vector3 spawnAreaCenter = new Vector3(0f, 0f, 0f);
-    public Vector3 spawnAreaSize = new Vector3(10f, 0f, 10f);
+    public Vector3 spawnAreaCenter = new Vector3(0f, 1.3119f, 0f);
+    public Vector3 spawnAreaSize = new Vector3(2.2f, 0f, 2.2f);
 
     private void Awake()
     {

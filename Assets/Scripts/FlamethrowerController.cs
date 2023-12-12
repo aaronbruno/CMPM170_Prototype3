@@ -1,19 +1,17 @@
 using UnityEngine;
-
 public class FlamethrowerController : MonoBehaviour
 {
     public ParticleSystem flameParticleSystem;
     public float cookTime = 3.0f; // Adjust as needed
     public float burnIntensity = 0.1f; // Adjust as needed
-    public int rayCount = 5; // Number of rays in the cone
-    public float coneAngle = 30f; // Angle of the cone
-
+    public int rayCount = 10; // Number of rays in the cone
+    public float coneAngle = .1f; // Angle of the cone
     private float currentCookTime;
     private bool isCooking;
     private FoodScript currentFoodScript;
 
     public Transform tipTransform;
-
+    
     private void Update()
     {
         HandleFlamethrower();
@@ -92,7 +90,6 @@ public class FlamethrowerController : MonoBehaviour
                         float newB = Mathf.Clamp01(originalColor.b - burnIntensity * Time.deltaTime);
                         Color newColor = new Color(newR, newG, newB, originalColor.a);
                         partnerRenderer.material.color = newColor;
-
                         Debug.Log("Material color changed successfully.");
                         Debug.Log("Original Color: " + originalColor);
                         Debug.Log("New Color: " + newColor);
