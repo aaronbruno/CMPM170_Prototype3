@@ -12,6 +12,8 @@ public class FlamethrowerController : MonoBehaviour
     private bool isCooking;
     private FoodScript currentFoodScript;
 
+    public Transform tipTransform;
+
     private void Update()
     {
         HandleFlamethrower();
@@ -55,15 +57,21 @@ public class FlamethrowerController : MonoBehaviour
 
         float angleIncrement = coneAngle / (float)(rayCount - 1);
 
+        // Use the position of the flamethrower GameObject as the raycast origin
+        Vector3 raycastOrigin = transform.position;
+
         for (int i = 0; i < rayCount; i++)
         {
             Quaternion rotation = Quaternion.Euler(0, -coneAngle / 2f + i * angleIncrement, 0);
             Vector3 direction = rotation * transform.forward;
 
+            // Ensure that the direction is normalized
+            direction.Normalize();
+
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity))
+            if (Physics.Raycast(raycastOrigin, direction, out hit, Mathf.Infinity))
             {
-                Debug.DrawRay(transform.position, direction * hit.distance, Color.red, 1.0f);
+                Debug.DrawRay(raycastOrigin, direction * hit.distance, Color.red, 1.0f);
 
                 FoodScript foodScript = hit.collider.GetComponent<FoodScript>();
                 if (foodScript != null && !foodScript.IsCooked() && !isCooking)
